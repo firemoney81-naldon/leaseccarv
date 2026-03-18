@@ -1,23 +1,660 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <!-- Schema.org JSON-LD structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Car Lease Comparison Service",
+    "name": "수입차 리스 가격 비교 센터",
+    "description": "2026년 최신 수입차 모델별 리스 가격을 비교하고 개인 및 법인 사업자에게 최적의 견적을 제공하는 전문 서비스입니다. BMW, 벤츠, 아우디, 포르쉐 등 다양한 브랜드의 운용리스 및 금융리스 상품을 비교 추천해드립니다.",
+    "provider": {
+      "@type": "Organization",
+      "name": "오토리스 전문가 그룹",
+      "telephone": "1661-XXXX",
+      "url": "https://www.example.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.example.com/logo.png"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "서울 강남구 테헤란로 123",
+        "addressLocality": "서울시 강남구",
+        "addressRegion": "서울특별시",
+        "postalCode": "06130",
+        "addressCountry": "KR"
+      }
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "수입차 리스 상품 목록",
+      "itemListElement": [
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"벤츠 리스 가격 비교"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"BMW 리스 견적"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"아우디 리스 프로모션"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"테슬라 전기차 리스"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"포르쉐 리스 신규 가입 혜택"}}
+      ]
+    }
+  }
+  </script>
+
+  <!-- Google Fonts for better readability -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS for modern design -->
+  <style>
+    :root {
+      --primary-color: #0078D7; /* Soft Blue */
+      --secondary-color: #E6F0FF; /* Light Blue Background */
+      --background-color: #F8F9FA; /* Light Grey Background */
+      --text-color: #333333; /* Dark Grey Text */
+      --shadow-color: rgba(0, 0, 0, 0.08);
+      --border-color: #e0e0e0;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      line-height: 1.8;
+      background-color: var(--background-color);
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 40px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    header p {
+      font-size: 1.2em;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    nav {
+      background-color: var(--background-color);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    nav li {
+      padding: 15px 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 600;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding: 15px 10px;
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--primary-color);
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 2em;
+      color: #222;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      color: #444;
+      margin-top: 20px;
+      margin-bottom: 15px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      background-color: #005a9e;
+    }
+
+    .service-card {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .service-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .service-card ul li {
+      background-color: var(--secondary-color);
+      padding: 12px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .image-container {
+      margin: 20px 0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    table th, table td {
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      text-align: left;
+    }
+
+    table th {
+      background-color: var(--secondary-color);
+      font-weight: 700;
+      color: #222;
+    }
+
+    .flex-container {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .flex-item {
+      flex: 1;
+    }
+
+    .review-box {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .review-box strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .faq-item {
+      background-color: #fff;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .faq-question {
+      padding: 15px 20px;
+      background-color: #fefefe;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.1em;
+      display: block;
+      position: relative;
+    }
+
+    .faq-answer {
+      padding: 15px 20px;
+      background-color: #fff;
+      border-top: 1px solid var(--border-color);
+      display: none;
+    }
+
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .faq-question.active::after {
+      content: '-';
+    }
+
+    #contact form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    #contact label {
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    #contact input[type="text"],
+    #contact input[type="tel"],
+    #contact textarea,
+    #contact select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+
+    #contact button {
+      width: 100%;
+      border: none;
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 50px;
+    }
+
+    .internal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .internal-links a {
+      background-color: var(--secondary-color);
+      padding: 8px 15px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: var(--primary-color);
+      font-size: 0.9em;
+      transition: background-color 0.3s;
+    }
+
+    .internal-links a:hover {
+      background-color: #d0e7ff;
+    }
+
+    .external-links ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .external-links li {
+      margin-bottom: 10px;
+    }
+
+    .source-info {
+      font-size: 0.9em;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    /* Media Queries for responsiveness */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2em; }
+      nav ul { flex-wrap: wrap; justify-content: space-around; }
+      .flex-container { flex-direction: column; }
+      section { margin: 20px auto; padding: 0 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 영역 -->
+  <header>
+    <h1>2026 수입차 리스 가격 비교 및 견적 추천: 벤츠 BMW 아우디 최저가 전문 업체</h1>
+    <p>수입차 리스, 신차 구매보다 더 합리적인 선택이 될 수 있습니다. 2026년 최신 모델별 리스료와 장단점을 비교하고, 초기 비용 부담 없는 최적의 견적을 제공해 드립니다. 개인 사업자, 법인 리스 전문 상담.</p>
+    <a href="#quote-request" class="cta-button">1:1 맞춤형 무료 견적 상담 신청</a>
+  </header>
+
+  <!-- 내비게이션 -->
+  <nav>
+    <ul>
+      <li><a href="#lease-intro">리스란?</a></li>
+      <li><a href="#comparison">리스 vs 할부</a></li>
+      <li><a href="#models">인기 모델 추천</a></li>
+      <li><a href="#pricing-factors">가격 결정 요인</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#quote-request">견적 문의</a></li>
+    </ul>
+  </nav>
+
+  <!-- 메인 콘텐츠 영역 -->
+  <main>
+    <!-- 섹션 1: 리스란 무엇인가? -->
+    <section id="lease-intro">
+      <h2>리스(Lease)란 무엇이며 왜 2026년 트렌드로 자리 잡았을까?</h2>
+      <div class="image-container">
+        <!-- Pexels Source: 상업적 이용 가능 이미지 (Placeholder) -->
+        <img src="https://images.pexels.com/photos/1794178/pexels-photo-1794178.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="고급 수입차를 운전하는 모습">
+      </div>
+      <p>자동차 리스는 차량을 구매하지 않고 일정 기간 동안 대여하여 사용하는 금융 상품입니다. 특히 고가의 수입차를 선호하지만 초기 목돈 지출을 줄이고 싶은 개인 고객이나, 비용 처리를 통해 세금 혜택을 받고자 하는 법인 사업자에게 인기를 얻고 있습니다. 2026년에는 전기차(EV) 보조금 축소 및 금리 인상 등으로 인해 리스 시장이 더욱 확대되는 추세입니다.</p>
+
+      <h3>운용리스 vs. 금융리스: 차이점을 명확히 알아야 저렴한곳을 찾는다</h3>
+      <div class="flex-container">
+        <div class="flex-item">
+          <h4>운용리스 (Operating Lease)</h4>
+          <p>운용리스는 차량의 실질적인 소유권이 리스 회사에 있으며, 고객은 단순히 차량을 이용하는 대가로 리스료를 지불합니다. 월 리스료에 취득세, 등록세, 자동차세 등이 포함되는 경우가 많아 초기 비용 부담이 낮습니다. 계약 만료 시 반납하거나 인수를 선택할 수 있으며, 주행거리 제한이 있는 것이 특징입니다. 차량 반납 시 중고차 시세 하락에 대한 걱정이 없다는 장점이 있습니다.</p>
+          <ul>
+            <li><strong>특징:</strong> 낮은 초기 비용, 월 납입금 저렴, 중고차 처리 부담 없음.</li>
+            <li><strong>주요 타깃:</strong> 주기적인 신차 교체를 원하는 개인, 비용 처리 효과를 극대화하려는 사업자.</li>
+          </ul>
+        </div>
+        <div class="flex-item">
+          <h4>금융리스 (Financial Lease)</h4>
+          <p>금융리스는 차량을 할부로 구매하는 것과 유사하게, 리스 회사가 차량 구매 자금을 빌려주고 고객이 원금과 이자를 상환하는 방식입니다. 계약 만료 시 차량을 인수하는 것이 일반적이며, 운용리스와 달리 리스 기간 동안 차량의 소유권은 리스 회사에 있지만 고객이 보험과 세금을 직접 납부해야 합니다.</p>
+          <ul>
+            <li><strong>특징:</strong> 계약 만료 시 인수 의무가 강함, 회계 처리 방식이 다름, 차량 운용 자유도가 높음.</li>
+            <li><strong>주요 타깃:</strong> 차량 인수를 염두에 두고 초기 비용 절감을 원하는 고객.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 섹션 2: 할부 vs. 리스 장단점 비교 및 2026년 가이드 -->
+    <section id="comparison">
+      <h2>수입차 구매 방식 비교: 할부 vs. 리스 장단점 분석</h2>
+      <p>수입차를 구매할 때 가장 많이 고민하는 '할부(분할 상환)'와 '리스(대여)' 중 어떤 방법이 나에게 더 유리한지 꼼꼼하게 따져보아야 합니다. 특히 2026년 금리 변동성 및 전기차 시장 변화를 고려하면 단순한 월 납입금 비교를 넘어선 종합적인 판단이 필요합니다.</p>
+      <div class="flex-container">
+        <div class="flex-item">
+          <h3>리스의 장점 (Advantages of Leasing)</h3>
+          <ul>
+            <li><strong>초기 비용 절감:</strong> 차량 가격의 7%에 달하는 취득세와 등록세를 납부할 필요가 없습니다. 보증금이나 선납금 없이 진행 가능한 상품도 많아 초기 목돈 부담을 최소화할 수 있습니다.</li>
+            <li><strong>월 납입금 부담 완화:</strong> 리스료는 차량 출고가에서 계약 종료 시점의 잔존가치를 뺀 금액을 기준으로 책정됩니다. 따라서 할부 구매보다 월 납입금이 저렴하다는 장점이 있습니다.</li>
+            <li><strong>세금 절세 효과 (사업자):</strong> 사업자의 경우 리스료 전액을 손비(비용) 처리할 수 있어, 법인세나 소득세를 절감하는 효과가 탁월합니다.</li>
+            <li><strong>신차 교체 용이성:</strong> 계약 기간이 보통 2~5년으로 짧아 최신 모델로 빠르게 교체하기 좋습니다. 중고차 판매에 대한 고민 없이 차량을 반납할 수 있습니다.</li>
+          </ul>
+        </div>
+        <div class="flex-item">
+          <h3>리스의 단점 (Disadvantages of Leasing)</h3>
+          <ul>
+            <li><strong>중도 해지 위약금:</strong> 계약 기간을 정하고 이용하는 상품이므로, 불가피한 사정으로 중도 해지 시 고액의 위약금이 발생합니다.</li>
+            <li><strong>약정 주행거리 제한:</strong> 대부분의 리스 상품에는 연간 주행거리 제한(예: 2만~3만km)이 있습니다. 약정 거리를 초과하면 추가 비용을 지불해야 합니다.</li>
+            <li><strong>차량 소유권 부재:</strong> 리스 기간 동안 차량의 소유권은 리스 회사에 있습니다. 따라서 차량 튜닝이나 변경이 자유롭지 않으며, '내 차'라는 만족감을 얻기 어렵다는 단점이 있습니다.</li>
+            <li><strong>총 비용 부담:</strong> 단기적으로 월 납입금이 저렴하지만, 장기적으로 총 비용을 계산했을 때 할부보다 높을 수 있습니다.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 섹션 3: 2026년 인기 수입차 모델별 리스 가격 및 견적 분석 (키워드 30개 이상 통합) -->
+    <section id="models">
+      <h2>2026년 최신 수입차 리스 인기 모델 추천 및 견적 분석</h2>
+      <p>2026년 국내 수입차 시장은 BMW와 벤츠의 양강 구도 속에서 테슬라의 전기차와 볼보, 렉서스 등의 약진이 두드러집니다. 각 브랜드의 인기 모델별 평균 리스 가격과 신규 가입 혜택, 저렴한곳을 찾는 팁을 정리해 드립니다.</p>
+
+      <h3>프리미엄 세단: 벤츠 E클래스 vs. BMW 5시리즈 (리스 비교)</h3>
+      <div class="flex-container">
+        <div class="flex-item">
+          <h4>벤츠 E클래스 리스 견적 (Mercedes-Benz E-Class)</h4>
+          <p>벤츠 E클래스는 수입차 시장에서 오랜 기간 '프리미엄 세단'의 상징으로 자리매김했습니다. 2026년형 모델은 이전 세대 대비 강화된 첨단 기술과 디자인으로 인기를 끌고 있습니다. E클래스 리스 견적은 트림과 옵션, 잔존가치 설정에 따라 크게 달라지며, 신규 가입 혜택을 통해 월 100만 원 내외의 가격으로 이용 가능합니다. 특히 사업자 고객의 경우 비용 처리를 통한 절세 효과가 커 추천합니다.</p>
+          <ul>
+            <li><strong>추천 모델:</strong> E220d, E300 4MATIC</li>
+            <li><strong>월 예상 금액:</strong> 90만 원 ~ 130만 원 (보증금 30% 기준)</li>
+          </ul>
+        </div>
+        <div class="flex-item">
+          <h4>BMW 5시리즈 리스 견적 (BMW 5 Series)</h4>
+          <p>BMW 5시리즈는 2026년에도 벤츠 E클래스와 함께 수입차 시장의 판매 순위 최상단을 다투는 모델입니다. 5시리즈는 다이내믹한 주행 성능과 세련된 디자인으로 젊은 층에게도 인기가 높습니다. 최근 BMW 파이낸셜 프로모션을 활용하면 저렴한곳을 찾는 수고 없이도 높은 할인율과 혜택을 받을 수 있습니다. 5시리즈 리스 내돈내산 후기를 보면, 유지 보수 비용을 포함한 상품 선택 시 만족도가 높습니다.</p>
+          <ul>
+            <li><strong>추천 모델:</strong> 520i, 530e 플러그인 하이브리드</li>
+            <li><strong>월 예상 금액:</strong> 85만 원 ~ 120만 원 (보증금 30% 기준)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>프리미엄 SUV: 포르쉐 카이엔, 벤츠 GLC, 볼보 XC60 비교</h3>
+      <p>SUV 시장의 성장세에 맞춰 프리미엄 브랜드들도 다양한 모델을 출시하고 있습니다. 2026년 수입 SUV 시장에서 리스 인기가 높은 모델은 다음과 같습니다.</p>
+      <div class="image-container">
+        <!-- Pexels Source: 상업적 이용 가능 이미지 (Placeholder) -->
+        <img src="https://images.pexels.com/photos/21014/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="고급 SUV 리스 차량">
+      </div>
+      <p><strong>포르쉐 카이엔 리스:</strong> 고성능 럭셔리 SUV의 대명사입니다. 포르쉐의 경우 리스 전문 업체를 통해 진행하면 비교적 합리적인 리스 가격으로 이용 가능하며, 중고차 가격 방어가 잘 되는 만큼 잔존가치를 높게 설정하여 월 납입금을 낮추는 전략이 추천됩니다. <strong>볼보 XC60 리스:</strong> 안전성과 스칸디나비아 디자인으로 국내 인기가 급상승한 모델입니다. 볼보 XC60 리스는 안정적인 잔존가치와 함께 신규 가입 혜택이 좋은 편이며, 신뢰할 수 있는 업체 순위를 참고하여 견적을 비교하는 것이 좋습니다. <strong>벤츠 GLC 리스:</strong> 벤츠 GLC는 콤팩트 SUV 시장에서 벤츠의 독보적인 위치를 차지합니다. GLC 리스는 여성 운전자나 소규모 가족 단위 고객에게 인기가 높으며, 비교 견적 시 다양한 금융사 프로모션 할인율을 확인해야 합니다.</p>
+
+      <h3>전기차(EV) 리스: 테슬라 모델 Y, 아우디 Q4 e-트론</h3>
+      <p>전기차 리스는 2026년에도 여전히 뜨거운 감자입니다. 전기차 보조금 제도가 매년 달라지면서 리스나 장기렌트를 통해 이용하는 고객이 증가하고 있습니다.</p>
+      <p><strong>테슬라 모델 Y 리스:</strong> 테슬라 모델 Y는 2024년 국내 수입차 판매 순위에서 1위를 차지할 정도로 폭발적인 인기를 끌었습니다. 리스 비용은 일반 내연기관 차량보다 다소 높게 책정될 수 있으나, 전기차 충전비용 절감 효과와 주행거리 제한 없는 리스 상품을 찾으면 만족도가 높습니다. <strong>아우디 Q4 e-트론 리스:</strong> 아우디의 콤팩트 전기차 SUV로, 세련된 디자인과 뛰어난 성능을 자랑합니다. 아우디 리스는 프로모션 시점에 따라 할인 폭이 크므로, 견적을 여러 곳에서 받아보는 것이 필수적입니다.</p>
+
+      <!-- 수입차 모델 키워드 30개 이상 통합 문단 -->
+      <p>저희는 <strong>벤츠 E클래스</strong>, <strong>BMW 5시리즈</strong>, <strong>아우디 A6</strong>, <strong>렉서스 ES300h</strong>, <strong>볼보 XC90</strong>, <strong>포르쉐 카이엔</strong>, <strong>테슬라 모델 S/X/Y</strong>, <strong>랜드로버 디펜더</strong>, <strong>폭스바겐 티구안</strong>, <strong>지프 랭글러</strong>, <strong>마세라티 기블리</strong>, <strong>재규어 F-TYPE</strong>, <strong>쉐보레 콜로라도</strong>, <strong>포드 익스플로러</strong>, <strong>혼다 CR-V</strong>, <strong>도요타 캠리</strong>, <strong>미니쿠퍼</strong>, <strong>푸조 508</strong> 등 30개 이상의 수입차 모델에 대한 전문적인 리스 견적을 제공합니다. 특히 <strong>신규 가입 혜택</strong>, <strong>할인 이벤트</strong>, <strong>현금지원</strong> 프로모션 정보를 실시간으로 비교하여 고객님께 <strong>최저가</strong> 견적을 안내해드립니다. 리스 이용 시 <strong>평균 가격</strong>, <strong>예상 비용</strong>, <strong>장단점</strong> 등을 상세히 비교해보고, 고객님의 상황에 맞는 <strong>추천</strong> 상품을 찾아드립니다.</p>
+
+      <!-- 그래프 및 표 활용: 리스 가격 비교표 -->
+      <h3>인기 모델별 2026년 리스 평균 가격대 (예상)</h3>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>브랜드/모델</th>
+            <th>차량 가격대 (원)</th>
+            <th>월 예상 리스료 (운용리스, 36개월 기준)</th>
+            <th>주요 특징</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BMW 5시리즈 (520i)</td>
+            <td>6,000만 원대</td>
+            <td>월 85만원 ~ 100만원</td>
+            <td>뛰어난 주행감, 높은 잔존가치, 빠른 신차 교체 용이</td>
+          </tr>
+          <tr>
+            <td>벤츠 E클래스 (E220d)</td>
+            <td>6,500만 원대</td>
+            <td>월 90만원 ~ 110만원</td>
+            <td>고급스러운 실내, 브랜드 가치, 높은 잔존가치</td>
+          </tr>
+          <tr>
+            <td>테슬라 모델 Y (RWD)</td>
+            <td>5,000만 원대</td>
+            <td>월 70만원 ~ 90만원</td>
+            <td>전기차의 미래, 저렴한 유지비용, 인기가 높은 모델</td>
+          </tr>
+          <tr>
+            <td>아우디 A6 (40 TDI)</td>
+            <td>5,500만 원대</td>
+            <td>월 75만원 ~ 95만원</td>
+            <td>세련된 디자인, 합리적인 리스 가격, 콰트로 옵션</td>
+          </tr>
+          <tr>
+            <td>볼보 XC60</td>
+            <td>5,800만 원대</td>
+            <td>월 80만원 ~ 100만원</td>
+            <td>안전성, 패밀리카로 적합, 높은 잔존가치</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="source-info">※ 상기 가격대는 2026년 시장 평균 견적을 기준으로 하며, 계약 조건(보증금, 잔존가치, 기간, 금리)에 따라 달라질 수 있습니다.</p>
+    </section>
+
+    <!-- 섹션 4: 리스 견적에 영향을 미치는 핵심 요소 분석 -->
+    <section id="pricing-factors">
+      <h2>리스 가격 견적을 결정하는 3가지 핵심 요소</h2>
+      <p>리스 견적은 단순히 차량 가격으로만 결정되지 않습니다. 월 납입금을 결정하는 주요 요소들을 이해하고 비교해야 비싼 곳을 피하고 저렴한곳을 찾을 수 있습니다.</p>
+
+      <h3>1. 잔존가치 (Residual Value)의 중요성</h3>
+      <p>잔존가치는 리스 계약이 끝난 시점에 차량이 지니고 있을 것으로 예상되는 가치입니다. 잔존가치가 높을수록 월 납입금 계산 시 차량 가격에서 차감되는 금액이 커지므로 월 리스료가 낮아집니다. <strong>BMW 5시리즈</strong>나 <strong>벤츠 E클래스</strong>처럼 중고차 시장에서 인기가 높은 모델은 잔존가치가 높게 책정되어 리스에 유리합니다. 반대로 잔존가치가 낮은 모델을 리스하면 월 납입금이 높아질 수 있습니다.</p>
+
+      <h3>2. 금리 (이자율) 및 수수료 비교</h3>
+      <p>리스도 일종의 금융 상품이므로 금리(이자율)가 핵심적인 요소입니다. 리스료 계산 공식에는 이자율이 반영되며, 금융사에 따라 적용하는 금리가 다릅니다. 2026년에는 기준 금리 변화에 따라 리스 이자율이 수시로 변동하므로, 여러 리스사(캐피탈, 카드사 등)의 실시간 금리를 비교하여 <strong>가장 저렴한곳</strong>을 선택하는 것이 중요합니다. 저희는 <strong>저렴한곳</strong>을 찾기 위해 국내 30개 이상의 제휴사를 한 번에 비교해 드립니다.</p>
+
+      <h3>3. 보증금 vs. 선납금 vs. 초기 비용 제로</h3>
+      <p><strong>보증금(Deposit)</strong>은 계약 만료 시 돌려받을 수 있는 금액입니다. 보증금을 높게 설정하면 월 리스료가 낮아집니다. <strong>선납금(Advance Payment)</strong>은 월 납입금의 일부를 미리 내는 것으로, 계약 만료 시 돌려받을 수 없습니다. 일부 업체에서는 선납금을 보증금처럼 속여 월 납입금을 낮춘 견적을 제시하기도 하므로 <strong>내돈내산 후기</strong>를 참고하여 꼼꼼하게 확인해야 합니다. 초기 비용을 전혀 내지 않는 '무보증 리스'도 있으나, 이 경우 월 납입금이 상대적으로 높아지고 신용도가 낮으면 승인이 어렵습니다.</p>
+    </section>
+
+    <!-- 섹션 5: 내부링크 및 검색 키워드 -->
+    <section>
+      <h2>함께 많이 찾는 검색어: 연관 검색 키워드 분석</h2>
+      <div class="internal-links">
+        <a href="#quote-request">수입차 리스 견적 문의</a>
+        <a href="#models">BMW 리스 가격</a>
+        <a href="#models">벤츠 E클래스 리스</a>
+        <a href="#models">테슬라 모델 Y 리스 비용</a>
+        <a href="#comparison">리스 할부 장단점 차이점</a>
+        <a href="#pricing-factors">운용리스 잔존가치</a>
+        <a href="#faq">리스 중도 해지 위약금</a>
+        <a href="#quote-request">리스 신규 가입 혜택</a>
+        <a href="#models">아우디 A6 리스</a>
+        <a href="#pricing-factors">저렴한 리스 싼곳 추천</a>
+        <a href="#models">볼보 XC60 리스 가격</a>
+        <a href="#quote-request">리스 비교 견적 업체 순위</a>
+      </div>
+    </section>
+
+    <!-- 섹션 6: FAQ (자주 묻는 질문) -->
+    <section id="faq" class="faq">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <div class="faq-item">
+        <div class="faq-question">Q1. 리스 계약 중 사고가 나면 보험 처리는 어떻게 되나요?</div>
+        <div class="faq-answer">A: 운용리스의 경우 고객이 직접 자동차 보험에 가입하게 됩니다. 따라서 사고 발생 시 개인의 보험 경력이 유지되며, 보험료 할증도 고객에게 적용됩니다. 장기렌트와 달리 개인 보험 경력을 이어갈 수 있다는 장점이 있습니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Q2. 리스 계약 만기 시 차량 인수를 꼭 해야 하나요?</div>
+        <div class="faq-answer">A: 운용리스의 경우 계약 만기 시 차량 반납, 인수, 재리스(연장) 중 선택할 수 있습니다. 금융리스는 보통 계약 만료 시점에 차량 인수가 의무화됩니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Q3. 리스 비용이 저렴한 곳을 찾는 팁이 있나요?</div>
+        <div class="faq-answer">A: 리스료는 잔존가치, 금리, 프로모션 할인율에 따라 달라지므로, 여러 캐피탈사의 조건을 동시에 비교해야 합니다. 특히 <strong>신규 가입 혜택</strong>이나 <strong>현금지원</strong> 프로모션이 있는 시점을 노리면 <strong>저렴한곳</strong>을 찾을 수 있습니다. 또한 보증금 비율을 높여 월 납입금을 낮추는 것도 좋은 방법입니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Q4. 수입차 리스 시 초기 비용을 전혀 안 낼 수도 있나요?</div>
+        <div class="faq-answer">A: 네, 무보증 리스 상품이 있습니다. 다만 이 경우 월 납입금이 높아지거나 신용도 심사 기준이 까다로워질 수 있습니다. <strong>리스 가격</strong>을 낮추려면 보증금 설정을 하는 것이 유리합니다.</div>
+      </div>
+    </section>
+
+    <!-- 섹션 7: 외부 신뢰도 링크 -->
+    <section id="external-info" class="external-links">
+      <h2>신뢰할 수 있는 외부 정보 참고</h2>
+      <p>리스 및 자동차 금융에 대한 공신력 있는 정보를 얻을 수 있는 사이트입니다.</p>
+      <ul>
+        <li><a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a>: 금융 소비자 보호 및 금융 상품 정보 제공.</li>
+        <li><a href="https://www.kofia.or.kr/" target="_blank">금융투자협회 (KOFIA)</a>: 금융 상품 관련 공식 정보 및 통계.</li>
+        <li><a href="https://namu.wiki/w/%EC%9E%90%EB%8F%99%EC%B0%A8%20%EB%A6%AC%EC%8A%A4" target="_blank">나무위키 - 자동차 리스</a>: 리스에 대한 상세 개념 및 관련 정보.</li>
+        <li><a href="https://www.yna.co.kr/" target="_blank">연합뉴스</a>: 최신 자동차 시장 동향 및 법률 관련 뉴스.</li>
+        <li><a href="https://www.kacpa.or.kr/" target="_blank">한국공인회계사회</a>: 사업자 비용 처리 및 세금 관련 정보.</li>
+      </ul>
+    </section>
+
+    <!-- 섹션 8: 견적 문의 및 CTA (Call to Action) -->
+    <section id="quote-request">
+      <h2>1:1 맞춤형 수입차 리스 견적 문의 (2026년 최저가 보장)</h2>
+      <div class="image-container">
+        <!-- Pexels Source: 상업적 이용 가능 이미지 (Placeholder) -->
+        <img src="https://images.pexels.com/photos/1035108/pexels-photo-1035108.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="계약서 작성 이미지">
+      </div>
+      <p>복잡한 수입차 리스 <strong>견적</strong>을 한 번에 비교하고, 고객님께 가장 유리한 <strong>가격</strong> 조건을 찾아드립니다. 여러 업체를 일일이 방문하거나 <strong>비교</strong>할 필요 없이, 아래 <strong>입력란</strong>에 정보를 남겨주시면 <strong>전문 업체</strong> 담당자가 신속하게 연락드립니다. <strong>신규 가입 혜택</strong> 및 <strong>할인 이벤트</strong>, <strong>현금지원</strong> 프로모션까지 상세히 안내받으세요.</p>
+      <form action="/submit-quote" method="post">
+        <div class="flex-container">
+          <div class="flex-item">
+            <label for="name">이름</label><input type="text" id="name" name="name" required placeholder="예: 홍길동">
+            <label for="phone">연락처</label><input type="tel" id="phone" name="phone" required placeholder="예: 010-1234-5678">
+            <label for="email">이메일 주소</label><input type="text" id="email" name="email" placeholder="예: example@example.com">
+          </div>
+          <div class="flex-item">
+            <label for="car_model">희망 차량 모델 (수입차 모델명)</label><select id="car_model" name="car_model" required>
+              <option value="">모델 선택</option>
+              <option value="벤츠 E클래스">벤츠 E클래스</option>
+              <option value="BMW 5시리즈">BMW 5시리즈</option>
+              <option value="아우디 A6">아우디 A6</option>
+              <option value="테슬라 모델 Y">테슬라 모델 Y</option>
+              <option value="볼보 XC60">볼보 XC60</option>
+              <option value="포르쉐 카이엔">포르쉐 카이엔</option>
+              <option value="기타 수입차">기타 수입차</option>
+            </select>
+            <label for="lease_type">희망 리스 유형</label><select id="lease_type" name="lease_type" required>
+              <option value="">유형 선택</option>
+              <option value="운용리스">운용리스 (반납/인수 선택)</option>
+              <option value="금융리스">금융리스 (인수 목적)</option>
+            </select>
+            <label for="lease_period">희망 계약 기간 (개월)</label><input type="number" id="lease_period" name="lease_period" min="24" max="60" required placeholder="예: 36개월">
+          </div>
+        </div>
+        <label for="details">상세 문의 내용 (초기 비용 예산, 주행거리, 사업자 여부 등)</label>
+        <textarea id="details" name="details" rows="5" required placeholder="예: 초기 비용 30% 선납 가능하며, 연간 주행거리 2만km 이내입니다. 개인 사업자 비용 처리가 목적입니다."></textarea>
+        <button type="submit" class="cta-button">무료 견적 요청하기</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- FAQ Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const questions = document.querySelectorAll('.faq-question');
+      questions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          const isActive = question.classList.contains('active');
+
+          // Close all answers first
+          document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+          document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+
+          // Toggle current item
+          if (!isActive) {
+            question.classList.add('active');
+            answer.style.display = 'block';
+          }
+        });
+      });
+    });
+  </script>
+  
